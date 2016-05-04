@@ -34,7 +34,7 @@ import (
 	"encoding/base64"
 )
 
-func Get() map[string][]byte {
+func GetAssets() map[string][]byte {
 	var assets = make(map[string][]byte, {{ .Assets | len }})
 {{ range .Assets }}
 	assets["{{ .Name }}"], _ = base64.StdEncoding.DecodeString("{{ .Data | base64 }}")

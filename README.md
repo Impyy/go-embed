@@ -9,7 +9,7 @@ by calling assets.Get(), which returns a map[string][]byte.
 An example:
 
 ```go
-assetMap := assets.Get()
+assetMap := assets.GetAssets()
 assetMap["css/bootstrap.min.css"]
 ```
 
