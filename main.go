@@ -85,10 +85,7 @@ func main() {
 			return err
 		}
 
-		assets = append(assets, &asset{
-			Name: assetName,
-			Data: bytes},
-		)
+		assets = append(assets, &asset{Name: assetName, Data: bytes})
 		return nil
 	})
 
