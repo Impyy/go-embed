@@ -96,11 +96,16 @@ func main() {
 		logger.Fatalf("error while walking %s: %s", *flagInput, err.Error())
 	}
 
-	var file *os.File
 	if outputExists {
-		file, err = os.OpenFile(*flagOutput, os.O_WRONLY, 0)
-	} else {
-		file, err = os.Create(*flagOutput)
+		err = os.Remove(*flagOutput)
+		if err != nil {
+			logger.Fatalf("error removing old output file %s: %s", *flagOutput, err.Error())
+		}
+	}
+
+	file, err := os.Create(*flagOutput)
+	if err != nil {
+		logger.Fatalf("error creating output file %s: %s", *flagOutput, err.Error())
 	}
 	defer file.Close()
 
