@@ -67,20 +67,28 @@ func main() {
 			return err
 		}
 
+		assetName, err := filepath.Rel(*flagInput, path)
+		if err != nil {
+			return err
+		}
+
 		//skip directories and hidden files
 		if !info.Mode().IsRegular() || strings.HasPrefix(filepath.Base(path), ".") {
-			logger.Printf("skipping %s\n", path)
+			logger.Printf("skipping %s\n", assetName)
 			return nil
 		}
 
-		logger.Printf("adding %s\n", path)
+		logger.Printf("adding %s\n", assetName)
 
 		bytes, err := ioutil.ReadFile(path)
 		if err != nil {
 			return err
 		}
 
-		assets = append(assets, &asset{Name: path, Data: bytes})
+		assets = append(assets, &asset{
+			Name: assetName,
+			Data: bytes},
+		)
 		return nil
 	})
 
